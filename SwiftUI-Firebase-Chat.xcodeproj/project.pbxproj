@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8902D35228AAA70D00320FC8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8902D35128AAA70D00320FC8 /* LoginView.swift */; };
 		8946E78728AAA0A500781735 /* SwiftUI_Firebase_ChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8946E78628AAA0A500781735 /* SwiftUI_Firebase_ChatApp.swift */; };
 		8946E78928AAA0A500781735 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8946E78828AAA0A500781735 /* ContentView.swift */; };
 		8946E78B28AAA0A700781735 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8946E78A28AAA0A700781735 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8902D35128AAA70D00320FC8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8946E78328AAA0A500781735 /* SwiftUI-Firebase-Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Firebase-Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8946E78628AAA0A500781735 /* SwiftUI_Firebase_ChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Firebase_ChatApp.swift; sourceTree = "<group>"; };
 		8946E78828AAA0A500781735 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			children = (
 				8946E78628AAA0A500781735 /* SwiftUI_Firebase_ChatApp.swift */,
 				8946E78828AAA0A500781735 /* ContentView.swift */,
+				8902D35128AAA70D00320FC8 /* LoginView.swift */,
 				8946E78A28AAA0A700781735 /* Assets.xcassets */,
 				8946E78C28AAA0A700781735 /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8902D35228AAA70D00320FC8 /* LoginView.swift in Sources */,
 				8946E78928AAA0A500781735 /* ContentView.swift in Sources */,
 				8946E78728AAA0A500781735 /* SwiftUI_Firebase_ChatApp.swift in Sources */,
 			);
