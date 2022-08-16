@@ -6,17 +6,19 @@
 //
 
 import SwiftUI
+import Firebase
+
 
 struct LoginView: View {
     
-     @State var isLoginMode = false
-     @State var email = ""
-     @State var password = ""
+    @State var isLoginMode = false
+    @State var email = ""
+    @State var password = ""
      
-     var body: some View {
-         NavigationView {
-             ScrollView {
-                 
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
                  VStack(spacing: 16) {
                      Picker(selection: $isLoginMode, label: Text("Picker here")) {
                          Text("Login")
@@ -60,6 +62,7 @@ struct LoginView: View {
                          }.background(Color.blue)
                          
                      }
+                     Text(self.loginStatusMessage)
                  }
                  .padding()
                  
@@ -68,15 +71,50 @@ struct LoginView: View {
              .background(Color(.init(white: 0, alpha: 0.05))
                              .ignoresSafeArea())
          }
+         .navigationViewStyle(StackNavigationViewStyle())
      }
      
-     private func handleAction() {
-         if isLoginMode {
-             print("Should log into Firebase with existing credentials")
-         } else {
-             print("Register a new account inside of Firebase Auth and then store image in Storage somehow....")
-         }
-     }
+    private func handleAction() {
+        if isLoginMode {
+            loginUser()
+            //print("Should log into Firebase with existing credentials")
+        } else {
+            createNewAccount()
+            //print("Register a new account inside of Firebase Auth and then store image in Storage somehow....")
+        }
+    }
+    
+        
+    private func loginUser() {
+        Auth.auth().signIn(withEmail: email, password: password) {
+            result, err in
+            if let err = err {
+                print("Failed to Log in user: ", err)
+                self.loginStatusMessage = "Failed to Log in user \(err)"
+                return // bail out return
+            }
+            
+            print("Successfully Logged in user: \(result?.user.uid ?? "")")
+            
+            self.loginStatusMessage = "Successfully Logged in user: \(result?.user.uid ?? "")"
+        }
+    }
+    @State var loginStatusMessage = ""
+    
+    private func createNewAccount() {
+        Auth.auth().createUser(withEmail: email, password: password) {
+            result, err in
+            if let err = err {
+                print("Faile to create new user: ", err)
+                self.loginStatusMessage = "Failed to create new user \(err)"
+                return // bail out return
+            }
+            
+            print("Successfully created new user: \(result?.user.uid ?? "")")
+            
+            self.loginStatusMessage = "Successfully created new user: \(result?.user.uid ?? "")"
+        }
+    }
 }
 
 struct LoginView_Previews: PreviewProvider {
