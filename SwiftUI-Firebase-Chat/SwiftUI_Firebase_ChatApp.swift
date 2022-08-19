@@ -16,7 +16,7 @@ struct SwiftUI_Firebase_ChatApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            MainMessagesView()
         }
     }
 }

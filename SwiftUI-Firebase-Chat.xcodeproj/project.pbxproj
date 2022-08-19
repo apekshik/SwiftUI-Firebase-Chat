@@ -18,6 +18,7 @@
 		8946E78928AAA0A500781735 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8946E78828AAA0A500781735 /* ContentView.swift */; };
 		8946E78B28AAA0A700781735 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8946E78A28AAA0A700781735 /* Assets.xcassets */; };
 		8946E78E28AAA0A700781735 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8946E78D28AAA0A700781735 /* Preview Assets.xcassets */; };
+		895D7B5728AF7A0700C2C706 /* MainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D7B5628AF7A0700C2C706 /* MainMessagesView.swift */; };
 		8997EB3C28AB58A200CC4B88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8997EB3B28AB58A100CC4B88 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		8946E78828AAA0A500781735 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8946E78A28AAA0A700781735 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8946E78D28AAA0A700781735 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		895D7B5628AF7A0700C2C706 /* MainMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesView.swift; sourceTree = "<group>"; };
 		8997EB3B28AB58A100CC4B88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +72,7 @@
 				8946E78628AAA0A500781735 /* SwiftUI_Firebase_ChatApp.swift */,
 				8946E78828AAA0A500781735 /* ContentView.swift */,
 				8902D35128AAA70D00320FC8 /* LoginView.swift */,
+				895D7B5628AF7A0700C2C706 /* MainMessagesView.swift */,
 				892ADA3228AB8FAD008B2468 /* ImagePicker.swift */,
 				8997EB3B28AB58A100CC4B88 /* GoogleService-Info.plist */,
 				8946E78A28AAA0A700781735 /* Assets.xcassets */,
@@ -171,6 +174,7 @@
 				892ADA3328AB8FAD008B2468 /* ImagePicker.swift in Sources */,
 				8946E78928AAA0A500781735 /* ContentView.swift in Sources */,
 				8946E78728AAA0A500781735 /* SwiftUI_Firebase_ChatApp.swift in Sources */,
+				895D7B5728AF7A0700C2C706 /* MainMessagesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
