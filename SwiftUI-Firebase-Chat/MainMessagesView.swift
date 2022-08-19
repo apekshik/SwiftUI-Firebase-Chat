@@ -4,13 +4,11 @@
 //
 //  Created by Apekshik Panigrahi on 8/19/22.
 //
-
+import Foundation
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct ChatUser {
-    let uid, email, profileImageUrl: String
-}
+
 
 class MainMessagesViewModel: ObservableObject {
 
@@ -19,9 +17,12 @@ class MainMessagesViewModel: ObservableObject {
 
     init() {
         fetchCurrentUser()
+        DispatchQueue.main.async {
+                 self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
+             }
     }
 
-    private func fetchCurrentUser() {
+    func fetchCurrentUser() {
 
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
@@ -40,11 +41,16 @@ class MainMessagesViewModel: ObservableObject {
                 return
 
             }
-            let uid = data["uid"] as? String ?? ""
-            let email = data["email"] as? String ?? ""
-            let profileImageUrl = data["profileImageUrl"] as? String ?? ""
-            self.chatUser = ChatUser(uid: uid, email: email, profileImageUrl: profileImageUrl)
+            
+            self.chatUser = .init(data: data)
         }
+    }
+    
+    @Published var isUserCurrentlyLoggedOut = false
+    
+    func handleSignOut() {
+        isUserCurrentlyLoggedOut.toggle()
+        try? FirebaseManager.shared.auth.signOut()
     }
 
 }
@@ -57,7 +63,7 @@ struct MainMessagesView: View {
         NavigationView {
 
             VStack {
-                Text("User: \(vm.chatUser?.uid ?? "")")
+//                Text("User: \(vm.chatUser?.uid ?? "")")
                 
                 customNavBar
                 messagesView
@@ -79,9 +85,10 @@ struct MainMessagesView: View {
                 .cornerRadius(10)
 //            Image(systemName: "person.fill")
 //                .font(.system(size: 34, weight: .heavy))
-
+            
+            let username: String = vm.chatUser?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? ""
             VStack(alignment: .leading, spacing: 4) {
-                Text("\(vm.chatUser?.email ?? "Error getting locally stored email of logged in user.")")
+                Text(username)
                     .font(.system(size: 24, weight: .bold))
 
                 HStack {
@@ -109,10 +116,17 @@ struct MainMessagesView: View {
             .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
                 .destructive(Text("Sign Out"), action: {
                     print("handle sign out")
+                    vm.handleSignOut()
                 }),
                     .cancel()
             ])
         }
+        .fullScreenCover(isPresented: $vm.isUserCurrentlyLoggedOut, onDismiss: nil) {
+             LoginView(didCompleteLoginProcess: {
+                 self.vm.isUserCurrentlyLoggedOut = false
+                 self.vm.fetchCurrentUser()
+             })
+         }
     }
 
     private var messagesView: some View {

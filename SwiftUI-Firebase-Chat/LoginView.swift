@@ -13,12 +13,14 @@ import FirebaseFirestore
 
 struct LoginView: View {
     
-    @State var isLoginMode = false
-    @State var email = ""
-    @State var password = ""
+    let didCompleteLoginProcess: () -> ()
+    
+    @State private var isLoginMode = false
+    @State private var email = ""
+    @State private var password = ""
      
-    @State var shouldShowImagePicker = false
-    @State var image: UIImage?
+    @State private var shouldShowImagePicker = false
+    @State private var image: UIImage?
     
     var body: some View {
         NavigationView {
@@ -119,11 +121,17 @@ struct LoginView: View {
             print("Successfully Logged in user: \(result?.user.uid ?? "")")
             
             self.loginStatusMessage = "Successfully Logged in user: \(result?.user.uid ?? "")"
+            
+            self.didCompleteLoginProcess()
         }
     }
     @State var loginStatusMessage = ""
     
     private func createNewAccount() {
+        if self.image == nil {
+            self.loginStatusMessage = "Must select image to create new account."
+            return
+        }
         Auth.auth().createUser(withEmail: email, password: password) {
             result, err in
             if let err = err {
@@ -166,6 +174,7 @@ struct LoginView: View {
     }
     
     private func storeUserInformation(imageProfileUrl: URL) {
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let userData = ["email": self.email, "uid": uid, "profileImageUrl": imageProfileUrl.absoluteString]
         Firestore.firestore().collection("users")
@@ -177,6 +186,8 @@ struct LoginView: View {
                 }
 
                 print("Success")
+                
+                self.didCompleteLoginProcess()
             }
     }
 
@@ -184,6 +195,8 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(didCompleteLoginProcess: {
+            
+        })
     }
 }
