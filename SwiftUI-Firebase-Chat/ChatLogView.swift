@@ -10,16 +10,22 @@ import SwiftUI
 struct ChatLogView: View {
     let chatUser: ChatUser?
 
+    init(chatUser: ChatUser?) {
+        self.chatUser = chatUser
+        self.vm = .init(chatUser: chatUser)
+    }
+    
     @State var chatText = ""
-
+    @ObservedObject var vm: ChatLogViewModel
+    
     var body: some View {
         ZStack {
             messagesView
             VStack(spacing: 0) {
                 Spacer()
-                chatBottomBar
-                    .background(Color.white.ignoresSafeArea())
+                chatBottomBar.ignoresSafeArea()
             }
+            Text(vm.errorMessage)
         }
         .navigationTitle(chatUser?.email ?? "")
             .navigationBarTitleDisplayMode(.inline)
@@ -62,7 +68,7 @@ struct ChatLogView: View {
             .frame(height: 40)
 
             Button {
-
+                vm.handleSend()
             } label: {
                 Text("Send")
                     .foregroundColor(.white)
@@ -96,6 +102,7 @@ struct ChatLogView: View {
 
 struct ChatLogView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatLogView(chatUser: nil)
+//        ChatLogView()
+        EmptyView()
     }
 }

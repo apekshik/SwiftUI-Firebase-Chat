@@ -26,6 +26,7 @@
 		8997EB3C28AB58A200CC4B88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8997EB3B28AB58A100CC4B88 /* GoogleService-Info.plist */; };
 		89A60C9928B0D7BA00E3CE0C /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A60C9828B0D7BA00E3CE0C /* ChatLogView.swift */; };
 		89A60C9C28B0D85A00E3CE0C /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A60C9B28B0D85A00E3CE0C /* MainMessagesViewModel.swift */; };
+		89A60C9E28B0E8A000E3CE0C /* ChatLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A60C9D28B0E8A000E3CE0C /* ChatLogViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		8997EB3B28AB58A100CC4B88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89A60C9828B0D7BA00E3CE0C /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		89A60C9B28B0D85A00E3CE0C /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
+		89A60C9D28B0E8A000E3CE0C /* ChatLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				895D7B5F28AFA1A100C2C706 /* ChatUser.swift */,
-				89A60C9B28B0D85A00E3CE0C /* MainMessagesViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -126,6 +127,8 @@
 		89A60C9A28B0D82D00E3CE0C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				89A60C9B28B0D85A00E3CE0C /* MainMessagesViewModel.swift */,
+				89A60C9D28B0E8A000E3CE0C /* ChatLogViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				895D7B6028AFA1A100C2C706 /* ChatUser.swift in Sources */,
 				895D7B5A28AF7D3500C2C706 /* FirebaseManager.swift in Sources */,
 				89A60C9928B0D7BA00E3CE0C /* ChatLogView.swift in Sources */,
+				89A60C9E28B0E8A000E3CE0C /* ChatLogViewModel.swift in Sources */,
 				8902D35228AAA70D00320FC8 /* LoginView.swift in Sources */,
 				895D7B6228AFA56800C2C706 /* CreateNewMessageView.swift in Sources */,
 				892ADA3328AB8FAD008B2468 /* ImagePicker.swift in Sources */,
