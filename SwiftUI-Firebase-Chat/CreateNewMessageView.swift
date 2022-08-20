@@ -87,6 +87,7 @@ struct CreateNewMessageView: View {
 
 struct CreateNewMessageView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNewMessageView()
+//        CreateNewMessageView()
+        MainMessagesView()
     }
 }

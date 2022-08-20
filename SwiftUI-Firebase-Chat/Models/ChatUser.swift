@@ -8,7 +8,7 @@
 import Foundation
 
 struct ChatUser: Identifiable {
-    var id: ObjectIdentifier
+    var id = UUID()
     
     let uid, email, profileImageUrl: String
     
