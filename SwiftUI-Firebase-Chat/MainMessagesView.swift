@@ -8,65 +8,23 @@ import Foundation
 import SwiftUI
 import SDWebImageSwiftUI
 
-
-
-class MainMessagesViewModel: ObservableObject {
-
-    @Published var errorMessage = ""
-    @Published var chatUser: ChatUser?
-
-    init() {
-        fetchCurrentUser()
-        DispatchQueue.main.async {
-                 self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
-             }
-    }
-
-    func fetchCurrentUser() {
-
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
-            self.errorMessage = "Could not find firebase uid"
-            return
-        }
-
-        FirebaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, error in
-            if let error = error {
-                self.errorMessage = "Failed to fetch current user: \(error)"
-                print("Failed to fetch current user:", error)
-                return
-            }
-
-            guard let data = snapshot?.data() else {
-                self.errorMessage = "No data found"
-                return
-
-            }
-            
-            self.chatUser = .init(data: data)
-        }
-    }
-    
-    @Published var isUserCurrentlyLoggedOut = false
-    
-    func handleSignOut() {
-        isUserCurrentlyLoggedOut.toggle()
-        try? FirebaseManager.shared.auth.signOut()
-    }
-
-}
-
-
 struct MainMessagesView: View {
     @State var shouldShowLogOutOptions = false
     @ObservedObject private var vm = MainMessagesViewModel()
+    @State private var showNewMessageScreen = false
+    @State var chatUser: ChatUser?
+    @State var shouldNavigateToChatLogView = false
+    
     var body: some View {
         NavigationView {
 
             VStack {
-//                Text("User: \(vm.chatUser?.uid ?? "")")
-                
                 customNavBar
                 messagesView
+                
+                NavigationLink("", isActive: $shouldNavigateToChatLogView) {
+                                  ChatLogView(chatUser: self.chatUser)
+                              }
             }
             .overlay(
                 newMessageButton, alignment: .bottom)
@@ -161,8 +119,7 @@ struct MainMessagesView: View {
             }.padding(.bottom, 50)
         }
     }
-
-    @State private var showNewMessageScreen = false
+    
     private var newMessageButton: some View {
         Button {
             showNewMessageScreen.toggle()
@@ -182,7 +139,11 @@ struct MainMessagesView: View {
         }
         .fullScreenCover(isPresented: $showNewMessageScreen) {
 //            Text("New Message Screen")
-            CreateNewMessageView()
+            CreateNewMessageView(didSelectNewUser: { user in
+                print(user.email)
+                self.shouldNavigateToChatLogView.toggle()
+                self.chatUser = user
+            })
         }
     }
 }
